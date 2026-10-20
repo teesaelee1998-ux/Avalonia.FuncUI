@@ -1,32 +1,26 @@
-﻿namespace Examples.CounterApp
+namespace Examples.CounterApp
 
 open Avalonia
-open Elmish
-open Avalonia.FuncUI.Components.Hosts
-open Avalonia.FuncUI
-open Avalonia.FuncUI.Elmish
 open Avalonia.Controls.ApplicationLifetimes
+open Avalonia.Themes.Fluent
+open Avalonia.FuncUI.Hosts
+open Avalonia.Controls
 
-type MainWindow() as this =
+type MainWindow() =
     inherit HostWindow()
     do
         base.Title <- "Counter Example"
+        base.Icon <- WindowIcon(System.IO.Path.Combine("Assets","Icons", "icon.ico"))
         base.Height <- 400.0
-        base.Width <- 400.0    
-      
-        //this.VisualRoot.VisualRoot.Renderer.DrawFps <- true
-        //this.VisualRoot.VisualRoot.Renderer.DrawDirtyRects <- true
-        Elmish.Program.mkSimple (fun () -> Counter.init) Counter.update Counter.view
-        |> Program.withHost this
-        |> Program.withConsoleTrace
-        |> Program.run
-        
+        base.Width <- 400.0
+        base.Content <- Main.view
+
 type App() =
     inherit Application()
 
     override this.Initialize() =
-        this.Styles.Load "resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"
-        this.Styles.Load "resm:Avalonia.Themes.Default.Accents.BaseDark.xaml?assembly=Avalonia.Themes.Default"
+        this.Styles.Add (FluentTheme())
+        this.RequestedThemeVariant <- Styling.ThemeVariant.Dark
 
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with

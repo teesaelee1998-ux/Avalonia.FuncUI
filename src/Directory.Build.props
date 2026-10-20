@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <AvaloniaVersion>12.1.0</AvaloniaVersion>
+    <FuncUIVersion>2.0.0</FuncUIVersion>
+  </PropertyGroup>
+	
+  <!-- Common NuGet package properties -->
+  <PropertyGroup>
+    <Authors>JaggerJo</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/fsprojects/Avalonia.FuncUI</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+</Project>

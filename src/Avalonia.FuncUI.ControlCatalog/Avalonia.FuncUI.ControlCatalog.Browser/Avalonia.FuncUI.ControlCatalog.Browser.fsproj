@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmMainJSPath>wwwroot\main.js</WasmMainJSPath>
+    <WasmRuntimeAssetsLocation>./_framework</WasmRuntimeAssetsLocation>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Properties\**" />
+    <None Include="wwwroot\**" />
+    <WasmExtraFilesToDeploy Include="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="runtimeconfig.template.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avalonia.FuncUI.ControlCatalog\Avalonia.FuncUI.ControlCatalog.fsproj" />
+  </ItemGroup>
+</Project>

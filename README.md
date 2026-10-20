@@ -1,46 +1,89 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-<p align="center"><img src="github/img/logo/FuncUI.png" width="400px" alt="Avalonia FuncUI"></p>
-<h1 align="center">Avalonia FuncUI</h1>
-<p align="center">Develop cross-platform MVU GUI Applications using F# and Avalonia!</p>
+<h1 align="center"><img src="github/img/logo/FuncUI_Boxed.png" width="32px" alt="Avalonia FuncUI"> 
+Avalonia FuncUI
+</h1>
+
+<p align="center">Develop cross-platform GUI Applications using <a href="https://fsharp.org">F#<a> and <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a>!</p>
 <p align="center">
-<a href="https://voyonic-labs.visualstudio.com/Avalonia.FuncUI/_apis/build/status/AvaloniaCommunity.Avalonia.FuncUI?branchName=master"><img src="https://voyonic-labs.visualstudio.com/Avalonia.FuncUI/_apis/build/status/AvaloniaCommunity.Avalonia.FuncUI?branchName=master"></a>
-<img src="https://img.shields.io/github/languages/top/JaggerJo/Avalonia.FuncUI" alt="GitHub top language">
-<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/JaggerJo/Avalonia.FuncUI">
-<img src="https://img.shields.io/github/license/JaggerJo/Avalonia.FuncUI">
-<a href="https://gitter.im/Avalonia-FuncUI/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/Avalonia-FuncUI/community.svg"></a>
+<img src="https://img.shields.io/github/languages/top/fsprojects/Avalonia.FuncUI" alt="GitHub top language">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/fsprojects/Avalonia.FuncUI">
+<img src="https://img.shields.io/github/license/fsprojects/Avalonia.FuncUI">
+<a href="https://www.nuget.org/packages/Avalonia.FuncUI">
+  <img alt="Nuget (with prereleases)" src="https://img.shields.io/nuget/vpre/Avalonia.FuncUI?color=green&label=package%20Avalonia.FuncUI">
+</a>
 </p><br>
 
-![](github/img/hero.png)
-*(Application was created using Avalonia.FuncUI!)*
+![](github/img/hero-multiple-apps.png)
 
 ## About
-This library allows you to write cross-platform GUI Applications entirely in F# - No XAML, but a declarative Elm-like DSL. MVU (Model-View-Update) architecture support is built in, and bindings to use it with Elmish are also ready to use.
+FuncUI is a thin layer built on top of [AvaloniaUI](https://github.com/AvaloniaUI/Avalonia). It contains abstractions 
+for writing UI applications in different programming styles. It also contains a component & state management system. 
 
-## Getting started
-Check out the [Wiki](https://github.com/JaggerJo/Avalonia.FuncUI/wiki) (WIP - examples are currently for 0.1.x) and [Examples](https://github.com/JaggerJo/Avalonia.FuncUI/tree/master/src/Examples).
+FuncUI mostly consists of:
+- Virtual DOM
+- View DSL
+- Component model
 
-### 🧱 [Templates](https://github.com/AvaloniaCommunity/Avalonia.FuncUI.ProjectTemplates)
+## Breaking changes in version 2.0
+Version 2.0 of FuncUI is built on Avalonia 12.0.
+Avalonia 12 has a number of breaking API changes which have necessitated matching breaking changes in FuncUI, such as the removal of previously obsoleted public functions and properties.
+Refer to the official [Breaking changes in Avalonia 12](https://docs.avaloniaui.net/docs/avalonia12-breaking-changes) documentation for full details.
+
+In addition, the DataGrid bindings which were previously built into the core FuncUI library have now been moved to the separate [AvaloniaCommunity.FuncUI.Bindings.DataGrid](https://www.nuget.org/packages/AvaloniaCommunity.FuncUI.Bindings.DataGrid) package. This means that if you depend on the DataGrid bindings then you will need to reference the new package from your project, but projects which don't use DataGrid will no longer have an unused dependency on it.
+
+## Resources
+
+- 💨 [Getting started](https://funcui.avaloniaui.net)
+
+- 📚 [Documentation](https://funcui.avaloniaui.net/)
+
+- 📖 [Control Catalog (Samples of available controls)](https://github.com/fsprojects/Avalonia.FuncUI/tree/master/src/Avalonia.FuncUI.ControlCatalog/Avalonia.FuncUI.ControlCatalog.Desktop)
+
+- 📓 [Examples](https://github.com/fsprojects/Avalonia.FuncUI/tree/master/src/Examples)
 
 ## Contributing
 Please contribute to this library through issue reports, pull requests, code reviews, documentation, and discussion. 
 
-## Example
-Below is the code of a simple counter app (using the Avalonia.FuncUI.Elmish package).
+## Examples
+### Example using components
+A simple counter made with the component library:
+
+``` f#
+type Components =
+    static member Counter () =
+        Component (fun ctx ->
+            let state = ctx.useState 0
+    
+            DockPanel.create [
+                DockPanel.children [
+                    Button.create [
+                        Button.onClick (fun _ -> state.Set(state.Current - 1))
+                        Button.content "click to decrement"
+                    ]
+                    Button.create [
+                        Button.onClick (fun _ -> state.Set(state.Current + 1))
+                        Button.content "click to increment"
+                    ]
+                    TextBlock.create [
+                        TextBlock.dock Dock.Top
+                        TextBlock.text (string state.Current)
+                    ]
+                ]
+            ]
+        )
+```
+
+Find more examples using components in the [Components Examples folder](https://github.com/fsprojects/Avalonia.FuncUI/tree/master/docs/components).
+
+### Example using Elmish
+The same counter as above but using the `Avalonia.FuncUI.Elmish` package:
 
 ```f#
 module Counter =
-
-    type CounterState = {
-        count : int
-    }
-
-    let init = {
-        count = 0
-    }
-
-    type Msg =
-    | Increment
-    | Decrement
+    type CounterState = { count : int }
+    let init = { count = 0 }
+    type Msg = Increment | Decrement
 
     let update (msg: Msg) (state: CounterState) : CounterState =
         match msg with
@@ -65,3 +108,34 @@ module Counter =
             ]
         ]    
 ```
+
+Find more examples using Elmish in the [Elmish Examples folder](https://github.com/fsprojects/Avalonia.FuncUI/tree/master/src/Examples/Elmish)
+
+# Maintainer(s)
+
+The current co-maintainers of Avalonia.FuncUI are
+
+* @Numpsy
+* @JordanMarr
+* @sleepyfran
+* @JaggerJo (project originator)
+
+The default maintainer account for projects under "fsprojects" is @fsprojectsgit - F# Community Project Incubation Space (repo management)
+
+# Commercial Support
+**Provided by [Voynoic Systems GmbH](https://www.voyonic-systems.de)**
+
+Please reach out to contact@voyonic-systmes.de if you need a commercial support contract or are interested in contract work.
+
+# Star History 
+
+<a href="https://star-history.com/#fsprojects/Avalonia.FuncUI&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=fsprojects/Avalonia.FuncUI&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=fsprojects/Avalonia.FuncUI&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=fsprojects/Avalonia.FuncUI&type=Date" />
+  </picture>
+</a>
+
+
+

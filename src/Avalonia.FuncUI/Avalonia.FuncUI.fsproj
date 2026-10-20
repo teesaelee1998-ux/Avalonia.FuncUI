@@ -1,22 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.2.0</Version>
-    <Authors>JaggerJo</Authors>
-    <Product>JaggerJo.Avalonia.FuncUI</Product>
-    <PackageId>JaggerJo.Avalonia.FuncUI</PackageId>
-    <PackageProjectUrl>https://github.com/FuncUI/Avalonia.FuncUI</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/FuncUI/Avalonia.FuncUI</RepositoryUrl>
+    <TargetFramework>net8.0</TargetFramework>
+    <Version>$(FuncUIVersion)</Version>
+    <Product>Avalonia.FuncUI</Product>
+    <PackageId>Avalonia.FuncUI</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIconUrl>https://github.com/FuncUI/Avalonia.FuncUI/blob/master/github/img/nuget_icon.png?raw=true</PackageIconUrl>
     <Title>Avalonia FuncUI</Title>
-    <PackageVersion>0.3.0</PackageVersion>
+    <PackageVersion>$(FuncUIVersion)</PackageVersion>
+    <Description>Develop cross-platform MVU GUI Applications using F# and Avalonia!</Description>
+    <PackageIcon>nuget_icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.2" />
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +32,173 @@
     <Compile Include="VirtualDom\VirtualDom.Differ.fs" />
     <Compile Include="VirtualDom\VirtualDom.Patcher.fs" />
     <Compile Include="VirtualDom\VirtualDom.fs" />
-    <Compile Include="Components\Hosts.fs" />
-    <Compile Include="Components\Lazy.fs" />
-    <Compile Include="Components\DataTemplateView.fs" />
-    <Compile Include="Builder.fs" />
+    <Compile Include="Components\Lib\Lib.DisposableBag.fs" />
+    <Compile Include="Components\Lib\Lib.Common.fs" />
+    <Compile Include="Components\State\State.fs" />
+    <Compile Include="Components\State\State.Adapters.fs" />
+    <Compile Include="Components\State\State.Functions.fs" />
+    <Compile Include="Components\Context\Context.EffectsHook.fs" />
+    <Compile Include="Components\Context\Context.StateHook.fs" />
+    <Compile Include="Components\Context\Context.fs" />
+    <Compile Include="Components\ComponentBase.fs" />
+    <Compile Include="Components\Component.fs" />
+    <Compile Include="Hosts.fs" />
+    <Compile Include="DataTemplateView.fs" />
     <Compile Include="Helpers.fs" />
+    <Compile Include="DSL\ViewBuilder.fs" />
+    <Compile Include="DSL\AttrBuilder.fs" />
+    <Compile Include="DSL\View.fs" />
+    <Compile Include="DSL\Base\AvaloniaObject.fs" />
+
+
+    <Compile Include="DSL\Base\Layoutable.fs" />
+    <Compile Include="DSL\Base\Interactive.fs" />
+    <Compile Include="DSL\Base\Visual.fs" />
+    <Compile Include="DSL\Base\InputElement.fs" />
+    <Compile Include="DSL\Base\Control.fs" />
+    <Compile Include="DSL\Base\StyledElement.fs" />
+    <Compile Include="DSL\Base\Panel.fs" />
+    <Compile Include="DSL\Base\ContentPresenter.fs" />
+    <Compile Include="DSL\Base\ScrollContentPresenter.fs" />
+    <Compile Include="DSL\Base\ItemsPresenter.fs" />
+    <Compile Include="DSL\Base\TextPresenter.fs" />
+    <Compile Include="DSL\Base\Animatable.fs" />
+    <Compile Include="DSL\Base\RenderOptions.fs" />
+    <Compile Include="DSL\Base\TextOptions.fs" />
+    <Compile Include="DSL\Primitives\AdornerLayer.fs" />
+    <Compile Include="DSL\Primitives\OverlayLayer.fs" />
+    <Compile Include="DSL\Primitives\TemplatedControl.fs" />
+    <Compile Include="DSL\Primitives\HeaderedContentControl.fs" />
+    <Compile Include="DSL\Primitives\HeaderedSelectingItemsControl.fs" />
+    <Compile Include="DSL\Primitives\SelectingItemsControl.fs" />
+    <Compile Include="DSL\Primitives\UniformGrid.fs" />
+    <Compile Include="DSL\Primitives\HeaderedItemsControl.fs" />
+    <Compile Include="DSL\Primitives\Track.fs" />
+    <Compile Include="DSL\Primitives\Popup.fs" />
+    <Compile Include="DSL\Primitives\TabStrip.fs" />
+    <Compile Include="DSL\Primitives\TabStripItem.fs" />
+    <Compile Include="DSL\Primitives\Thumb.fs" />
+    <Compile Include="DSL\Primitives\AccessText.fs" />
+    <Compile Include="DSL\Primitives\ScrollBar.fs" />
+    <Compile Include="DSL\Primitives\CalendarItem.fs" />
+    <Compile Include="DSL\Primitives\PickerPresenterBase.fs" />
+    <Compile Include="DSL\Primitives\TextElement.fs" />
+    <Compile Include="DSL\Panels\Canvas.fs" />
+    <Compile Include="DSL\Panels\DockPanel.fs" />
+    <Compile Include="DSL\Panels\Grid.fs" />
+    <Compile Include="DSL\Panels\StackPanel.fs" />
+    <Compile Include="DSL\Panels\ReversibleStackPanel.fs" />
+    <Compile Include="DSL\Panels\VirtualizingCarouselPanel.fs" />
+    <Compile Include="DSL\Panels\VirtualizingStackPanel.fs" />
+    <Compile Include="DSL\Panels\WrapPanel.fs" />
+    <Compile Include="DSL\Shapes\Shape.fs" />
+    <Compile Include="DSL\Shapes\Arc.fs" />
+    <Compile Include="DSL\Shapes\Rectangle.fs" />
+    <Compile Include="DSL\Shapes\Ellipse.fs" />
+    <Compile Include="DSL\Shapes\Line.fs" />
+    <Compile Include="DSL\Shapes\Polyline.fs" />
+    <Compile Include="DSL\Shapes\Polygon.fs" />
+    <Compile Include="DSL\Shapes\Path.fs" />
+    <Compile Include="DSL\Shapes\Sector.fs" />
+    <Compile Include="DSL\Calendar\CalendarButton.fs" />
+    <Compile Include="DSL\Calendar\CalendarDayButton.fs" />
+    <Compile Include="DSL\Calendar\Calendar.fs" />
+    <Compile Include="DSL\Calendar\CalendarDatePicker.fs" />
+    <Compile Include="DSL\Documents\TextDecoration.fs" />
+    <Compile Include="DSL\Documents\Inline.fs" />
+    <Compile Include="DSL\Documents\Run.fs" />
+    <Compile Include="DSL\Documents\Span.fs" />
+    <Compile Include="DSL\Documents\Bold.fs" />
+    <Compile Include="DSL\Documents\LineBreak.fs" />
+    <Compile Include="DSL\Documents\Italic.fs" />
+    <Compile Include="DSL\Documents\Underline.fs" />
+    <Compile Include="DSL\Documents\InlineUIContainer.fs" />
+    <Compile Include="DSL\Buttons\Button.fs" />
+    <Compile Include="DSL\Buttons\DropDownButton.fs" />
+    <Compile Include="DSL\Buttons\ButtonSpinner.fs" />
+    <Compile Include="DSL\Buttons\SplitButton.fs" />
+    <Compile Include="DSL\Buttons\RadioButton.fs" />
+    <Compile Include="DSL\Buttons\ToggleButton.fs" />
+    <Compile Include="DSL\Buttons\ToggleSplitButton.fs" />
+    <Compile Include="DSL\Buttons\ToggleSwitch.fs" />
+    <Compile Include="DSL\Buttons\CheckBox.fs" />
+    <Compile Include="DSL\Buttons\HyperlinkButton.fs" />
+    <Compile Include="DSL\RepeatButton.fs" />
+    <Compile Include="DSL\DatePicker.fs" />
+    <Compile Include="DSL\TimePicker.fs" />
+    <Compile Include="DSL\Flyout.fs" />
+    <Compile Include="DSL\ItemsControl.fs" />
+    <Compile Include="DSL\ContentControl.fs" />
+    <Compile Include="DSL\TransitioningContentControl.fs" />
+    
+    <Compile Include="DSL\AutoCompleteBox.fs" />
+    <Compile Include="DSL\NumericUpDown.fs" />
+    <Compile Include="DSL\Decorator.fs" />
+    <Compile Include="DSL\Border.fs" />
+    <Compile Include="DSL\ExperimentalAcrylicBorder.fs" />
+    <Compile Include="DSL\ThemeVariantScope.fs" />
+    <Compile Include="DSL\DataValidationErrors.fs" />
+    <Compile Include="DSL\ComboBoxItem.fs" />
+    <Compile Include="DSL\ComboBox.fs" />
+    <Compile Include="DSL\RefreshContainer.fs" />
+    <Compile Include="DSL\RefreshVisualizer.fs" />
+    <Compile Include="DSL\Carousel.fs" />
+    <Compile Include="DSL\NativeControlHost.fs" />
+    <Compile Include="DSL\Image.fs" />
+    <Compile Include="DSL\ListBox.fs" />
+    <Compile Include="DSL\TableView.fs" />
+    <Compile Include="DSL\RangeBase.fs" />
+    <Compile Include="DSL\ListBoxItem.fs" />
+    <Compile Include="DSL\MenuBase.fs" />
+    <Compile Include="DSL\Menu.fs" />
+    <Compile Include="DSL\NativeMenu.fs" />
+    <Compile Include="DSL\ContextMenu.fs" />
+    <Compile Include="DSL\MenuItem.fs" />
+    <Compile Include="DSL\NativeMenuItem.fs" />
+    <Compile Include="DSL\TrayIcon.fs" />
+    <Compile Include="DSL\GridSplitter.fs" />
+    <Compile Include="DSL\DatePickerPresenter.fs" />
+    <Compile Include="DSL\TimePickerPresenter.fs" />
+    <Compile Include="DSL\ProgressBar.fs" />
+    <Compile Include="DSL\ScrollViewer.fs" />
+    <Compile Include="DSL\Separator.fs" />
+    <Compile Include="DSL\Slider.fs" />
+    <Compile Include="DSL\SplitView.fs" />
+    <Compile Include="DSL\Expander.fs" />
+    <Compile Include="DSL\Spinner.fs" />
+    <Compile Include="DSL\LayoutTransformControl.fs" />
+    <Compile Include="DSL\TextBlock.fs" />
+    <Compile Include="DSL\TextBox.fs" />
+    <Compile Include="DSL\MaskedTextBox.fs" />
+    <Compile Include="DSL\TreeView.fs" />
+    <Compile Include="DSL\TreeViewItem.fs" />
+    <Compile Include="DSL\ToolTip.fs" />
+    <Compile Include="DSL\TabControl.fs" />
+    <Compile Include="DSL\TabItem.fs" />
+    <Compile Include="DSL\TickBar.fs" />
+    <Compile Include="DSL\Viewbox.fs" />
+    <Compile Include="DSL\SelectableTextBlock.fs" />
+    <Compile Include="DSL\PathIcon.fs" />
+    <Compile Include="DSL\DragDrop.fs" />
+    <Compile Include="DSL\Window.fs" />
+    <Compile Include="DSL\KeyBinding.fs" />
+    <Compile Include="DSL\GroupBox.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\github\img\nuget_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <Compile Include="Experimental\Experimental.StaticComponent.fs" />
+    <Compile Include="Experimental\Experimental.Animations.fs" />
+    <Compile Include="Experimental\Experimental.EnvironmentState.fs" />
+    <Compile Include="Experimental\Experimental.Operators.fs" />
+    <Compile Include="Experimental\Experimental.Hooks.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

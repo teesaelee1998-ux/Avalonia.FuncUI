@@ -1,0 +1,39 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="using:System">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <!-- FluentTheme has no common FintSize Resources. -->
+            <sys:Double x:Key="FontSizeSmall">10</sys:Double>
+            <sys:Double x:Key="FontSizeNormal">12</sys:Double>
+            <sys:Double x:Key="FontSizeLarge">16</sys:Double>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="Button.round /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    
+    <Style Selector="Button">
+        <Setter Property="Background" Value="#16a085"/>
+    </Style>
+    <Style Selector="Button:pointerover">
+        <Setter Property="Background" Value="#1abc9c"/>
+    </Style>
+
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+    </Style>
+
+    <Style Selector="Border.drag">
+        <Setter Property="Background" Value="{DynamicResource SystemControlHighlightAccentBrush}"/>
+    </Style>
+    <Style Selector="Border.drop">
+        <Setter Property="Background" Value="{DynamicResource SystemControlHighlightAltListAccentMediumBrush}"/>
+    </Style>
+</Styles>

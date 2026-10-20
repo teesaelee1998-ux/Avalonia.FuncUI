@@ -250,8 +250,11 @@ paket-files/
 # FAKE - F# Make
 .fake/
 
-#ionide
+# ionide
 .ionide/
+
+# docs
+src/docs/_public
 
 # JetBrains Rider
 .idea/
@@ -263,3 +266,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# BenchmarkDotNet artifacts
+src/Avalonia.FuncUI.Benchmarks/BenchmarkDotNet.Artifacts/**

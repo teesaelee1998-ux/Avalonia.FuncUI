@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <WarnOn>3390;$(WarnOn)</WarnOn>
+    <RootNamespace>Examples.ChordParser</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Icons\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="ChordParser.fs" />
+    <Compile Include="SampleCharts.fs" />
+    <Compile Include="ChordParserView.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup />
+
+  <ItemGroup>
+    <PackageReference Include="FParsec" Version="1.1.1" />
+	<PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <ProjectReference Include="..\..\Avalonia.FuncUI.Diagnostics\Avalonia.FuncUI.Diagnostics.fsproj" />
+    <ProjectReference Include="..\..\Avalonia.FuncUI.Elmish\Avalonia.FuncUI.Elmish.fsproj" />
+    <ProjectReference Include="..\..\Avalonia.FuncUI\Avalonia.FuncUI.fsproj" />
+  </ItemGroup>
+
+</Project>
